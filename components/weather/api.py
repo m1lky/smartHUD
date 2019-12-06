@@ -94,6 +94,14 @@ class Weather(object):
     return None
 
   def get_display_data(self, data=None):
+    """Converts data or the last response from the api to a readable
+       format suitable for use with tkinter
+    Args:
+        data (dict, optional): The weather api data to format
+    
+    Returns:
+        dict: weather keys and values are human readable versions of data
+    """
     data = data or self.last_response['currently']
     ret_val = {}
     for key, value in data.items():
@@ -103,12 +111,23 @@ class Weather(object):
           new_val = get_wind_direction(value)
         elif 'temp' in key.lower():
           new_val = str(round(value  * 5.0 / 9.0) + 32) + chr(176)
-        elif  key == 'time':
+        elif key == 'time':
           new_val = datetime.datetime.fromtimestamp(value).strftime("%m/%d/%y %H:%M")
         elif key == 'icon':
-          new_val = 'weather/assets/' + ICON_FILES[value] + '.gif'
+          new_val = 'components/weather/assets/' + ICON_FILES[value] + '.gif'
+        elif key == 'precipProbability':
+          new_val = "{:,.2f}%".format(value)
         elif key in DISPLAY_NAMES_MAP.keys():
           new_val = value
         if new_val:
           ret_val[DISPLAY_NAMES_MAP[key]] = new_val
     return ret_val
+
+  def get_weather_display_data(self):
+    """Helper function to both get the data and return display version
+    
+    Returns:
+        dict: same as get_display_data
+    """
+    self.get_weather()
+    return self.get_display_data()
