@@ -21,7 +21,7 @@ class DisplayWeather(tk.Frame):
     for row, key in enumerate(data):
       if key != 'icon':
         textvariable = tk.StringVar(value=key + ' is ' + str(data[key]))
-        message = tk.Label(self.root, textvariable=textvariable, width=50, background="black", fg="white", font=('Monospace', '25'), pady=5)
+        message = tk.Label(self.root, textvariable=textvariable, width=50, background="black", fg="cyan", font=('Monospace', '25'), pady=5)
         self.message_boxes.append( (textvariable, message, key) )
         message.grid(row=(row % 2) + row + 2, column=1)
   
@@ -36,5 +36,5 @@ class DisplayWeather(tk.Frame):
       sleep(900) # 15 minutes
   def _set_icon(self, icon):
     self.image_tk = get_image_file(icon)
-    self.label_img = tk.Label(self.root, image=self.image_tk, background="black", fg="white")
+    self.label_img = tk.Label(self.root, image=self.image_tk, background="black", fg="cyan")
     self.label_img.grid(row=1, column=1)
