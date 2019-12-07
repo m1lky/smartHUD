@@ -21,7 +21,7 @@ class DisplayWeather(tk.Frame):
     for row, key in enumerate(data):
       if key != 'icon':
         textvariable = tk.StringVar(value=key + ' is ' + str(data[key]))
-        message = tk.Label(self.root, textvariable=textvariable, width=50, background="black", fg="#47daff", font=('Monospace', '25'), pady=5)
+        message = tk.Label(self.root, textvariable=textvariable, width=50, background="black", fg="#00ffee", font=('Monospace', '25'), pady=5)
         self.message_boxes.append( (textvariable, message, key) )
         message.grid(row=(row % 2) + row + 2, column=1)
   
